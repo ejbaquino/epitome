@@ -1,0 +1,92 @@
+{% extends 'layout/adminLayout.html' %}
+{% block header %}View User{% endblock %}
+
+{% block body %}
+     <div id="wrapper">
+
+      <!-- Sidebar -->
+       <ul class="sidebar navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/admin">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Add Items</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/books">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Manage Books</span>
+          </a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/admin/users">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Manage Users</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/category">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Manage Categories</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Logout</span></a>
+        </li>
+      </ul>
+      
+      <div id="content-wrapper">
+        
+        <div class="container-fluid">
+          <a href="/admin/users"><button class="btn btn-outline-primary" >Go back</button></a>
+        <div class="card">
+          <div class="card-img-top d-flex align-items-center bg-light">
+            <div>
+            <img id="book-covers" class="card-img-top" src="https://powerplants.com.au/wp-content/uploads/2017/04/no-profile-pic.jpg" alt="Card image cap">
+            </div>
+              <div class="card-body">
+                <h5 class="card-title">Kevin Banawis</h5>
+                <p class="card-text">Description</p>
+              </div>
+            </div>
+          </div>
+         <div class="card mb-3">
+            <div class="card-header">
+              <i class="fas fa-table"></i>
+              Kevin's Library</div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>ISBN</th>
+                      <th>Book Name</th>
+                      <th>Author</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>S012345</td>
+                      <td>Harry Potter</td>
+                      <td>Kenneth Lagunilla</td>
+                    </tr>
+                  <tr>
+                      <td>S678901</td>
+                      <td>Goblet of Goblin</td>
+                      <td>Kevin Banawin</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+            
+
+        </div>
+        <!-- /.container-fluid -->
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+{% endblock %}
+

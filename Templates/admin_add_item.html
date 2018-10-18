@@ -1,0 +1,188 @@
+{% extends 'layout/adminLayout.html' %}
+{% block header %}View Book{% endblock %}
+{% block body %}
+
+     <div id="wrapper">
+
+      <!-- Sidebar -->
+      <ul class="sidebar navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/admin">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Add Items</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/admin/books">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Manage Books</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/users">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Manage Users</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/category">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Manage Categories</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Logout</span></a>
+        </li>
+      </ul>
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+        </div>
+        <!-- /.container-fluid -->
+        <div class="container">
+          <div class="card">
+        <div class="card-header">Register an Account</div>
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <div class="form-row">
+                <div class="col-md-6">
+                  <div class="form-label-group">
+                    <input type="text" id="firstName" class="form-control" placeholder="First name" required="required" autofocus="autofocus">
+                    <label for="firstName">First name</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-label-group">
+                    <input type="text" id="lastName" class="form-control" placeholder="Last name" required="required">
+                    <label for="lastName">Last name</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-label-group">
+                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required">
+                <label for="inputEmail">Email address</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-row">
+                <div class="col-md-6">
+                  <div class="form-label-group">
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
+                    <label for="inputPassword">Password</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-label-group">
+                    <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm password" required="required">
+                    <label for="confirmPassword">Confirm password</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="btn btn-primary btn-block" href="#">Register</a>
+          </form>
+        </div>
+            </div>
+    </div>
+        <br><br>
+        <div class="container">
+          <div class="card">
+        <div class="card-header">Add Category</div>
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              
+              <div class="form-row">
+                <div class="col-md-12">
+                  <div class="form-label-group">
+                    <input type="text" id="category" class="form-control" placeholder="Category Name" required="required" autofocus="autofocus">
+                    <label for="category">Category</label>
+                  </div>
+                </div>
+            </div>
+            </div>
+            <a class="btn btn-primary btn-block" href="#">Add Category</a>
+          </form>
+        </div>
+          </div>
+    </div>
+        <br><br>
+    <div class="container">
+          <div class="card">
+        <div class="card-header">Add Books</div>
+        <div class="card-body">
+          <form>
+
+            <div class="form-group">
+              <label for="selectgenre">Genre Type:</label>
+              <div class="form-label-group">
+                <select id="selectgenre" class="form-control" required="required">
+                  <option value="Mustard" selected="selected">Action</option>
+                  <option value="Ketchup">Romance</option>
+                  <option value="Relish">Drama</option>
+                </select>
+
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-row">
+                <div class="col-md-12">
+                  <div class="form-label-group">
+                    <input type="text" id="books" class="form-control" placeholder="Book Title" required="required" autofocus="autofocus">
+                    <label for="books">Book Title</label>
+                  </div>
+                </div>
+            </div>
+            </div>
+            <div class="form-group">
+              <div class="form-row">
+                <div class="col-md-12">
+                  <div class="form-label-group">
+                    <input type="text" id="author" class="form-control" placeholder="Book author" required="required" autofocus="autofocus">
+                    <label for="author">Book Author</label>
+                  </div>
+                </div>
+            </div>
+            </div>
+            <a class="btn btn-primary btn-block" href="#">Add Book</a>
+          </form>
+        </div>
+          </div>
+    </div>
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+{% endblock %}
+
+{% block modal %}
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="login.html">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
