@@ -1,10 +1,17 @@
-from flask import Flask
-from flask import render_template
-
+import functools
+from flask import (
+   Flask, Blueprint, flash, g, redirect, render_template, request, session, url_for)
+from werkzeug.security import check_password_hash, generate_password_hash
+import users
 app = Flask(__name__)
 app.debug = True
 
-@app.route('/')
+
+app.register_blueprint(users.bp)
+app.add_url_rule('/', endpoint='index')
+app.add_url_rule('/register', endpoint='register')
+
+'''@app.route('/')
 @app.route('/home')
 def landing():
     return render_template("index.html")
@@ -15,7 +22,7 @@ def login():
 
 @app.route('/register')
 def register():
-    return render_template("register.html")
+    return render_template("register.html")'''
 
 @app.route('/admin')
 def addItems():
@@ -42,4 +49,4 @@ def searchUserName():
     return render_template("admin_view_user.html")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
