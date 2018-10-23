@@ -8,7 +8,7 @@
       <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="/admin">
+          <a class="nav-link" href="/admin/items">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Add Items</span></a>
         </li>
@@ -30,7 +30,7 @@
             <span>Manage Categories</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="/logout">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Logout</span></a>
         </li>
@@ -58,30 +58,18 @@
                       <th>View User</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>ID</th>
-                      <th>Username</th>
-                      <th>Full Name</th>
-                      <th>Email</th>
-                      <th>View User</th>
-                    </tr>
-                  </tfoot>
                   <tbody>
+                  {% for row in users %}
                     <tr>
-                      <td>1</td>
-                      <td>Papercup18</td>
-                      <td>EJ Aquino</td>
-                      <td>ej_aquino@gmail.com</td>
-					  <td><a href="/admin/users/name"><button class="btn btn-outline-info">More Details</button></a></td>
+                      <td>{{ row[0] }}</td>
+                      <td>{{ row[4] }}</td>
+                      <td>{{ row[1] + " " + row[2] }}</td>
+                      <td>{{ row[3] }}</td>
+                      <form method="post" action="/admin/users/name">
+					  <td><button type="submit" name="btn_uid" value="{{ row[0] }}" class="btn btn-outline-info">More Details</button></a></td>
+                      </form>
                     </tr>
-                  <tr>
-                      <td>2</td>
-                      <td>hyperx_master25</td>
-                      <td>Sean Ivan Covar</td>
-                      <td>Seen_eban@hotmail.com</td>
-                      <td><a href="/admin/users/name"><button class="btn btn-outline-info">More Details</button></a></td>
-                    </tr>
+                   {% endfor %}
                   </tbody>
                 </table>
               </div>

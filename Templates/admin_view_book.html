@@ -9,7 +9,7 @@
       <!-- Sidebar -->
       <ul class="sidebar navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="/admin">
+          <a class="nav-link" href="/admin/items">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Add Items</span></a>
         </li>
@@ -31,7 +31,7 @@
             <span>Manage Categories</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="/logout">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Logout</span></a>
         </li>
@@ -45,8 +45,11 @@
           		<a href="/admin/books"><button class="btn btn-outline-primary">Go back</button></a>
 			</div>
 			<div class="col-sm-18">
-			    <button class="btn btn-outline-info" data-toggle="modal" data-target="#editModal">Edit Book</button>
+
+                <button class="btn btn-outline-info" data-toggle="modal" data-target="#editModal">Edit Book</button>
           		<button class="btn btn-outline-danger" data-toggle="modal" data-target="#removeModal">Delete Book</button>
+
+
 			</div>
 			</div>
         
@@ -56,9 +59,8 @@
 			   <img  id="book-covers" src="https://marketplace.canva.com/MAB4A8xTTac/1/0/thumbnail_large/canva-minimalist-teen-fiction-wattpad-book-cover-MAB4A8xTTac.jpg" alt="Card image cap">
 		  	</div>
 			<div class="card-body">
-			   <h5 class="card-title">The Fourth Wind by <i>Quinn Whitfield</i></h5>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+			   <h5 class="card-title">{{ bTitle }} by <i> {{ bAut }}</i></h5>
+              <p class="card-text"> {{ bDesc}}
 			</div>
 		  </div>
           
@@ -72,16 +74,15 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Type</th>
+                      <th>Genre</th>
                     </tr>
                   </thead>
                   <tbody>
+                  {% for x in cat %}
                     <tr>
-                      <td>Romance</td>
+                      <td> {{ x[0] }}</td>
                     </tr>
-                  <tr>
-                      <td>Documentary</td>
-                    </tr>
+                  {% endfor %}
                   </tbody>
                 </table>
               </div>
@@ -104,10 +105,11 @@
               <span aria-hidden="true">×</span>
             </button>
           </div>
-          <div class="modal-body">Are you sure you want to remove the category??</div>
+          <form id="form_delete" method="post" action="/admin/books/name/Delete"></form>
+          <div class="modal-body">Are you sure you want to remove the category?</div>
           <div class="modal-footer">
             <button class="btn btn-primary" type="button" data-dismiss="modal">Go back</button>
-            <a class="btn btn-danger" href="#">Remove</a>
+            <button type="submit" name="btn_bdelete" value="{{ bID }}" form="form_delete" class="btn btn-danger" href="#">Remove</button>
           </div>
         </div>
       </div>
@@ -122,29 +124,31 @@
               <span aria-hidden="true">×</span>
             </button>
           </div>
+        <form id="form_update" method="post">
           <div class="modal-body">
             <div class="form-group">
                 <label for="bookTitle">Book Title:</label>
-                <input type="text" class="form-control" id="bookTitle" value="The Fourth Wind">
+                <!-- FOUND YOU  -->
+                <input name="u_title" form="form_update" type="text" class="form-control" id="bookTitle" value="{{ bTitle }}">
               </div>
 			<div class="form-group">
                 <label for="bookAuthor">Book Author:</label>
-                <input type="text" class="form-control" id="bookAuthor" value="Quinn Whitfield">
+                <input name="u_author" form="form_update" type="text" class="form-control" id="bookAuthor" value="{{ bAut }}">
               </div>
 			<div class="form-group">
                 <label for="bookDescription">Book Description:</label>
-			  <textarea class="form-control rounded-0" id="bookDescription" rows="5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut</textarea>
+			  <textarea name="u_desc" form="form_update" class="form-control rounded-0" id="bookDescription" rows="5">{{ bDesc }}</textarea>
 			</div>
-			<div class="form-group">
-                <label for="tags">Book Author:</label>
-                <input type="text" class="form-control" id="tags" value="Romance, Documentary">
-              </div>
-          </div>
           <div class="modal-footer">
+
             <button class="btn btn-primary" type="button" data-dismiss="modal">Go Back</button>
-            <button class="btn btn-success" type="button" data-dismiss="modal">Update</button>
+            <!-- class="btn btn-success" data-dismiss="modal" -->
+            <button type="submit" name="btn_bedit" value="{{ bID }}" formaction="/admin/books/name/Edit" class="btn btn-success">Update</button>
           </div>
+
         </div>
+        </form>
+
       </div>
     </div>
   {% endblock %}

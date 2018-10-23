@@ -2,12 +2,14 @@
 {% block header %}View User{% endblock %}
 
 {% block body %}
-     <div id="wrapper">
 
+
+<div id="wrapper">
       <!-- Sidebar -->
+
        <ul class="sidebar navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="/admin">
+          <a class="nav-link" href="/admin/items">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Add Items</span></a>
         </li>
@@ -38,22 +40,34 @@
       <div id="content-wrapper">
         
         <div class="container-fluid">
-          <a href="/admin/users"><button class="btn btn-outline-primary" >Go back</button></a>
+          <div class="row">
+			<div class="col-sm">
+          		<a href="/admin/users"><button class="btn btn-outline-primary">Go back</button></a>
+			</div>
+			<div class="col-sm-18">
+			    <button class="btn btn-outline-info" data-toggle="modal" data-target="#editModal">Modify Info</button>
+                <button class="btn btn-outline-info" data-toggle="modal" data-target="#editPassModal">Change Password</button>
+          		<button class="btn btn-outline-danger" data-toggle="modal" data-target="#removeModal">Delete User</button>
+		      </div>
+		  </div>
         <div class="card">
+
           <div class="card-img-top d-flex align-items-center bg-light">
             <div>
             <img id="book-covers" class="card-img-top" src="https://powerplants.com.au/wp-content/uploads/2017/04/no-profile-pic.jpg" alt="Card image cap">
             </div>
+            {% for user in y %}
               <div class="card-body">
-                <h5 class="card-title">Kevin Banawis</h5>
-                <p class="card-text">Description</p>
+                <h5 class="card-title">{{ user[1] + " " + user[2] }}</h5>
+                <p class="card-text">{{ user[3] }}</p>
               </div>
             </div>
           </div>
          <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
-              Kevin's Library</div>
+              {{ user[1] }}'s Library</div>
+              {% endfor %}
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -65,16 +79,13 @@
                     </tr>
                   </thead>
                   <tbody>
+                  {% for x in userlib %}
                     <tr>
-                      <td>S012345</td>
-                      <td>Harry Potter</td>
-                      <td>Kenneth Lagunilla</td>
+                      <td>{{ x[0] }}</td>
+                      <td>{{ x[1] }}</td>
+                      <td>{{ x[2] }}</td>
                     </tr>
-                  <tr>
-                      <td>S678901</td>
-                      <td>Goblet of Goblin</td>
-                      <td>Kevin Banawin</td>
-                    </tr>
+                  {% endfor %}
                   </tbody>
                 </table>
               </div>
@@ -87,6 +98,145 @@
       </div>
       <!-- /.content-wrapper -->
 
+    {% for z in y %}
+    <!--Delete Modal-->
+    <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="RemoveModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="RemoveModalLabel">Delete User</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Are you sure you want to remove this user?</div>
+           <form id="form_mod" method="get" action="/admin/users/name/Delete/{{ z[0] }}"></form>
+          <div class="modal-footer">
+            <button class="btn btn-primary" type="button" data-dismiss="modal">Go back</button>
+            <button type="submit" form="form_mod" class="btn btn-danger">Delete User</button>
+          </div>
+        </div>
+      </div>
     </div>
+	<!-- Edit Modal -->
+	<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Edit User Credentials</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+         <form method="post">
+          <div class="modal-body">
+            <div class="form-group">
+                <label for="userFN">First Name:</label>
+                <input name="modFN" type="text" class="form-control" id="userFN" value="{{ z[1] }}">
+              </div>
+			<div class="form-group">
+                <label for="userLN">Last Name:</label>
+                <input name="modLN" type="text" class="form-control" id="userLN" value="{{ z[2] }}">
+              </div>
+			<div class="form-group">
+                <label for="userEmail">Email:</label>
+                <input name="modEmail" type="text" class="form-control" id="userEmail" value="{{ z[3] }}">
+              </div>
+			<div class="form-group">
+                <label for="tags">Username:</label>
+                <input name="modUN" type="text" class="form-control" id="tags" value="{{ z[4] }}">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" type="button" data-dismiss="modal">Go Back</button>
+            <button type="submit" name="modUID" formaction="/admin/users/name/Modify" value="{{ z[0] }}" class="btn btn-success">Update Info</button>
+          </div>
+         </form>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Change Pass modal -->
+      <div class="modal fade" id="editPassModal" tabindex="-1" role="dialog" aria-labelledby="editPassModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editPassModalLabel">Change Password this User</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+                <label for="userOldPass">Old Password:</label>
+                <input name="modOpass" type="password" class="form-control" id="userOldPass">
+              </div>
+			<div class="form-group">
+                <label for="userNewPass">New Password:</label>
+                <input name="modNpass" type="password" class="form-control" id="userNewPass">
+              </div>
+			<div class="form-group">
+                <label for="userCNewPass">Confirm Password:</label>
+                <input name="modCNpass" type="password" class="form-control" id="userCNewPass">
+              </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" type="button" data-dismiss="modal">Go Back</button>
+            <button class="btn btn-success" type="button" onClick="chPass('{{ z[0] }}');">Change Password</button> <!-- updatePass('{{ z[0] }}') -->
+            <script>
+                     function chPass(upID) {
+
+                     var olderPass = "{{ z[5] }}";
+                     var oldPass = document.getElementById("userOldPass").value;
+                     var newPass = document.getElementById("userNewPass").value;
+                     var confnewPass = document.getElementById("userCNewPass").value;
+                     var x = newPass.length;
+
+                     if(oldPass != olderPass)
+                     {
+                         alert("Incorrect old password.");
+                     }
+                     else if(confnewPass != newPass)
+                     {
+                         alert("Password must be match to confirmed password.");
+                     }
+                     else if(x < 8)
+                     {
+                         alert("Password must be 8 characters atleast.");
+                     }
+                     else
+                     {
+                        $.ajax({
+                        data : {
+                                modCID : upID,
+                                modNpass : $('#userNewPass').val()
+                                },
+                        type : 'POST',
+                        url : '/admin/users/name/ModPass',
+                        cache : false
+                        })
+                        .done(function(data) {
+                                alert('You have successfully changed the password.');
+                                window.location.href = "/admin/users"
+                        });
+                        event.preventDefault();
+                        }
+                      }
+            </script>
+          </div>
+
+        </div>
+      </div>
+    </div>
+      </div>
+
+    {% endfor %}
+
+
+
+</div>
+
 {% endblock %}
+
+
 

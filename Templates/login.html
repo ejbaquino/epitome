@@ -6,21 +6,22 @@
       <div class="card card-login mx-auto mt-5">
         <div class="card-header">Login</div>
         <div class="card-body">
-          <form>
+          <form action="/admin" method="post">
             <div class="form-group">
               <div class="form-label-group">
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
+                <input name="txtEmail" type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
                 <label for="inputEmail">Email address</label>
               </div>
             </div>
             <div class="form-group">
               <div class="form-label-group">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
+                <input name="txtPass" type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
                 <label for="inputPassword">Password</label>
               </div>
             </div>
-            <a class="btn btn-primary btn-block" href="/">Login</a>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
           </form>
+          <h6 style="color:red"> {{ prompt }} </h6>
 		  <a href="/register"><button class="btn btn-outline-info btn-block">New to Epitome? Register Now!</button></a>
         </div>
       </div>
